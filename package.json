@@ -1,0 +1,17 @@
+{
+  "name": "template-site",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"pnpm --filter web dev\" \"supabase start\"",
+    "build": "pnpm --filter web build",
+    "typecheck": "pnpm --filter web typecheck",
+    "lint": "pnpm --filter web lint",
+    "test": "pnpm --filter web test",
+    "db:types": "supabase gen types typescript --local > apps/web/src/lib/database.types.ts",
+    "db:reset": "supabase db reset",
+    "setup": "node scripts/setup.js"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}
