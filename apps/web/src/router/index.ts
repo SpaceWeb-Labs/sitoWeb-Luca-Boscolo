@@ -11,19 +11,23 @@ const router = createRouter({
     return { top: 0, behavior: 'smooth' }
   },
   routes: [
-    // ─── Public ───────────────────────────────
+    // ─── Single Page ─────────────────────────────
     {
       path: '/',
       component: () => import('@/views/HomeView.vue'),
     },
-    {
-      path: '/chi-siamo',
-      component: () => import('@/views/AboutView.vue'),
-    },
+
+    // ─── Standalone pages ────────────────────────
     {
       path: '/servizi',
       component: () => import('@/views/ServicesView.vue'),
     },
+    {
+      path: '/privacy',
+      component: () => import('@/views/PrivacyView.vue'),
+    },
+
+    // ─── Blog (if needed) ────────────────────────
     {
       path: '/blog',
       component: () => import('@/views/blog/BlogListView.vue'),
@@ -32,16 +36,8 @@ const router = createRouter({
       path: '/blog/:slug',
       component: () => import('@/views/blog/BlogPostView.vue'),
     },
-    {
-      path: '/contatti',
-      component: () => import('@/views/ContactView.vue'),
-    },
-    {
-      path: '/privacy',
-      component: () => import('@/views/PrivacyView.vue'),
-    },
 
-    // ─── Admin (opzionale) ────────────────────
+    // ─── Admin (opzionale) ───────────────────────
     ...(ADMIN_ENABLED
       ? [
           {
@@ -79,7 +75,11 @@ const router = createRouter({
         ]
       : []),
 
-    // ─── 404 ──────────────────────────────────
+    // ─── Redirects for old multi-page paths ──────
+    { path: '/chi-siamo', redirect: '/#chi-sono' },
+    { path: '/contatti', redirect: '/#contatti' },
+
+    // ─── 404 ─────────────────────────────────────
     {
       path: '/:pathMatch(.*)*',
       component: () => import('@/views/NotFoundView.vue'),
