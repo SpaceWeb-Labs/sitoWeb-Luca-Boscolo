@@ -1,5 +1,5 @@
-import { ref, type Ref } from 'vue'
 import type { PostgrestError } from '@supabase/supabase-js'
+import { ref, type Ref } from 'vue'
 
 /**
  * Composable per query Supabase — gestisce loading/error/data
@@ -10,7 +10,7 @@ import type { PostgrestError } from '@supabase/supabase-js'
  * )
  */
 export function useQuery<T>(
-  queryFn: () => PromiseLike<{ data: T | null; error: PostgrestError | null }>,
+  queryFn: () => PromiseLike<{ data: T | null, error: PostgrestError | null }>,
   options: {
     immediate?: boolean
     onSuccess?: (data: T) => void
@@ -26,7 +26,11 @@ export function useQuery<T>(
     error.value = null
     try {
       const { data: result, error: dbError } = await queryFn()
-      if (dbError) { error.value = dbError.message; options.onError?.(dbError); return }
+      if (dbError) {
+        error.value = dbError.message
+        options.onError?.(dbError)
+        return
+      }
       data.value = result
       options.onSuccess?.(result as T)
     }
@@ -38,7 +42,8 @@ export function useQuery<T>(
     }
   }
 
-  if (options.immediate !== false) execute()
+  if (options.immediate !== false)
+    execute()
 
   return { data, loading, error, execute, refetch: execute }
 }
@@ -52,7 +57,7 @@ export function useQuery<T>(
  * )
  */
 export function useMutation<TInput, TResult>(
-  mutationFn: (input: TInput) => PromiseLike<{ data: TResult | null; error: PostgrestError | null }>,
+  mutationFn: (input: TInput) => PromiseLike<{ data: TResult | null, error: PostgrestError | null }>,
   options: {
     onSuccess?: (data: TResult) => void
     onError?: (error: PostgrestError) => void
@@ -66,7 +71,11 @@ export function useMutation<TInput, TResult>(
     error.value = null
     try {
       const { data, error: dbError } = await mutationFn(input)
-      if (dbError) { error.value = dbError.message; options.onError?.(dbError); return null }
+      if (dbError) {
+        error.value = dbError.message
+        options.onError?.(dbError)
+        return null
+      }
       options.onSuccess?.(data as TResult)
       return data
     }

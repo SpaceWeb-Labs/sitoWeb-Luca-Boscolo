@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import SiteLayout from '@/components/layout/SiteLayout.vue'
 import { useSeo } from '@/composables/useSeo'
 import { supabase } from '@/lib/supabase'
-import SiteLayout from '@/components/layout/SiteLayout.vue'
 
 const { t } = useI18n()
 useSeo({ title: t('nav.contact') })
@@ -34,7 +34,8 @@ async function submit() {
         message: form.value.message,
       })
 
-    if (dbError) throw dbError
+    if (dbError)
+      throw dbError
 
     // DB save succeeded — capture form data before reset, then mark success
     const sentForm = { ...form.value }
@@ -80,7 +81,9 @@ async function submit() {
           <!-- Form -->
           <div class="contact-form-wrap">
             <div v-if="state === 'success'" class="success-message">
-              <div class="success-icon">✓</div>
+              <div class="success-icon">
+                ✓
+              </div>
               <h3>{{ t('contact.successTitle') }}</h3>
               <p>{{ t('contact.successText') }}</p>
               <button class="btn-secondary" @click="state = 'idle'">
@@ -129,7 +132,9 @@ async function submit() {
                 />
               </div>
 
-              <p v-if="state === 'error'" class="error-msg">{{ t(errorKey) }}</p>
+              <p v-if="state === 'error'" class="error-msg">
+                {{ t(errorKey) }}
+              </p>
 
               <button
                 class="btn-primary"
@@ -141,7 +146,9 @@ async function submit() {
 
               <p class="privacy-note">
                 {{ t('contact.privacyNote') }}
-                <RouterLink to="/privacy">{{ t('cookie.privacyPolicy') }}</RouterLink>
+                <RouterLink to="/privacy">
+                  {{ t('cookie.privacyPolicy') }}
+                </RouterLink>
               </p>
             </div>
           </div>

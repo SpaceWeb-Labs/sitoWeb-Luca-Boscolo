@@ -22,7 +22,9 @@ const contactEmail = import.meta.env.VITE_CONTACT_EMAIL || '{{CONTACT_EMAIL}}'
       >
         ← {{ t('errors.goHome') }}
       </RouterLink>
-      <h1 style="font-size: 36px; font-weight: 700; margin: 0 0 32px;">Privacy Policy</h1>
+      <h1 style="font-size: 36px; font-weight: 700; margin: 0 0 32px;">
+        Privacy Policy
+      </h1>
       <p><em>Aggiornata il {{ privacyDate }}</em></p>
       <h2>1. Titolare del trattamento</h2>
       <p>{{ companyName }}, {{ companyAddress }}. Email: {{ contactEmail }}</p>

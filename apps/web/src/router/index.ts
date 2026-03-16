@@ -6,8 +6,10 @@ const ADMIN_ENABLED = import.meta.env.VITE_ENABLE_ADMIN === 'true'
 const router = createRouter({
   history: createWebHistory(),
   scrollBehavior(to, _from, savedPosition) {
-    if (savedPosition) return savedPosition
-    if (to.hash) return { el: to.hash, behavior: 'smooth' }
+    if (savedPosition)
+      return savedPosition
+    if (to.hash)
+      return { el: to.hash, behavior: 'smooth' }
     return { top: 0, behavior: 'smooth' }
   },
   routes: [
@@ -89,14 +91,18 @@ const router = createRouter({
 
 // Guards
 router.beforeEach(async (to) => {
-  if (!to.meta.requiresAdmin && !to.meta.requiresGuest) return true
+  if (!to.meta.requiresAdmin && !to.meta.requiresGuest)
+    return true
 
   const auth = useAuthStore()
-  if (!auth.initialized) await auth.initialize()
+  if (!auth.initialized)
+    await auth.initialize()
 
   if (to.meta.requiresAdmin) {
-    if (!auth.user) return '/admin/login'
-    if (!auth.isAdmin) return '/'
+    if (!auth.user)
+      return '/admin/login'
+    if (!auth.isAdmin)
+      return '/'
   }
 
   if (to.meta.requiresGuest && auth.user) {

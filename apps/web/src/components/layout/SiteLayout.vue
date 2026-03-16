@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 import { siteConfig } from '@/site.config'
@@ -21,7 +21,8 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 function scrollTo(id: string) {
   mobileOpen.value = false
   const el = document.getElementById(id)
-  if (el) el.scrollIntoView({ behavior: 'smooth' })
+  if (el)
+    el.scrollIntoView({ behavior: 'smooth' })
 }
 
 function scrollToContatti() {
@@ -32,12 +33,12 @@ function scrollToContatti() {
 <template>
   <div class="site-layout">
     <!-- Header -->
-    <header :class="['site-header', { scrolled }]">
+    <header class="site-header" :class="[{ scrolled }]">
       <div class="header-container">
         <!-- Logo -->
         <RouterLink to="/" class="logo">
           <div class="logo-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" /></svg>
           </div>
           <div class="logo-text">
             <span class="logo-name">{{ siteConfig.name }}</span>
@@ -59,8 +60,12 @@ function scrollToContatti() {
             </a>
           </template>
           <template v-else>
-            <RouterLink to="/" class="nav-link">{{ t('nav.home') }}</RouterLink>
-            <RouterLink to="/servizi" class="nav-link">{{ t('nav.services') }}</RouterLink>
+            <RouterLink to="/" class="nav-link">
+              {{ t('nav.home') }}
+            </RouterLink>
+            <RouterLink to="/servizi" class="nav-link">
+              {{ t('nav.services') }}
+            </RouterLink>
           </template>
         </nav>
 
@@ -71,17 +76,17 @@ function scrollToContatti() {
           class="header-cta"
           @click.prevent="scrollToContatti"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
           {{ t('nav.cta') }}
         </a>
         <RouterLink v-else to="/#contatti" class="header-cta">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
           {{ t('nav.cta') }}
         </RouterLink>
 
         <!-- Mobile menu button -->
         <button
-          :class="['mobile-menu-btn', { open: mobileOpen }]"
+          class="mobile-menu-btn" :class="[{ open: mobileOpen }]"
           :aria-label="mobileOpen ? t('common.close') : 'Menu'"
           @click="mobileOpen = !mobileOpen"
         >
@@ -104,8 +109,12 @@ function scrollToContatti() {
             </a>
           </template>
           <template v-else>
-            <RouterLink to="/" class="nav-link" @click="mobileOpen = false">{{ t('nav.home') }}</RouterLink>
-            <RouterLink to="/servizi" class="nav-link" @click="mobileOpen = false">{{ t('nav.services') }}</RouterLink>
+            <RouterLink to="/" class="nav-link" @click="mobileOpen = false">
+              {{ t('nav.home') }}
+            </RouterLink>
+            <RouterLink to="/servizi" class="nav-link" @click="mobileOpen = false">
+              {{ t('nav.services') }}
+            </RouterLink>
           </template>
           <a
             v-if="isHome()"
@@ -136,49 +145,69 @@ function scrollToContatti() {
           <div class="footer-brand">
             <div class="footer-logo">
               <div class="footer-logo-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" /></svg>
               </div>
               <div>
                 <strong>{{ siteConfig.name }}</strong>
                 <span>{{ siteConfig.title }}</span>
               </div>
             </div>
-            <p class="footer-tagline">Consulenza assicurativa personalizzata in provincia di Varese</p>
+            <p class="footer-tagline">
+              Consulenza assicurativa personalizzata in provincia di Varese
+            </p>
           </div>
 
           <div class="footer-links-grid">
             <!-- Quick links -->
             <div class="footer-col">
               <h4>Navigazione</h4>
-              <RouterLink to="/">Home</RouterLink>
-              <RouterLink to="/servizi">Servizi</RouterLink>
-              <RouterLink to="/#chi-sono">Chi Sono</RouterLink>
-              <RouterLink to="/#contatti">Contatti</RouterLink>
+              <RouterLink to="/">
+                Home
+              </RouterLink>
+              <RouterLink to="/servizi">
+                Servizi
+              </RouterLink>
+              <RouterLink to="/#chi-sono">
+                Chi Sono
+              </RouterLink>
+              <RouterLink to="/#contatti">
+                Contatti
+              </RouterLink>
             </div>
 
             <!-- Services -->
             <div class="footer-col">
               <h4>Servizi</h4>
-              <RouterLink to="/servizi#auto">Auto e Mobilità</RouterLink>
-              <RouterLink to="/servizi#casa">Casa e Patrimonio</RouterLink>
-              <RouterLink to="/servizi#salute">Salute e Famiglia</RouterLink>
-              <RouterLink to="/servizi#previdenza">Previdenza e Risparmio</RouterLink>
-              <RouterLink to="/servizi#impresa">Impresa e Professionisti</RouterLink>
+              <RouterLink to="/servizi#auto">
+                Auto e Mobilità
+              </RouterLink>
+              <RouterLink to="/servizi#casa">
+                Casa e Patrimonio
+              </RouterLink>
+              <RouterLink to="/servizi#salute">
+                Salute e Famiglia
+              </RouterLink>
+              <RouterLink to="/servizi#previdenza">
+                Previdenza e Risparmio
+              </RouterLink>
+              <RouterLink to="/servizi#impresa">
+                Impresa e Professionisti
+              </RouterLink>
             </div>
 
             <!-- Contact -->
             <div class="footer-col">
               <h4>Contatti</h4>
               <a :href="`mailto:${siteConfig.email}`" class="footer-contact-link">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>
                 {{ siteConfig.email }}
               </a>
               <a :href="`tel:${siteConfig.phone.replace(/\s/g, '')}`" class="footer-contact-link">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
                 {{ siteConfig.phone }}
               </a>
               <span class="footer-contact-link">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z" /><circle cx="12" cy="10" r="3" /></svg>
                 {{ siteConfig.area }}
               </span>
             </div>
@@ -200,7 +229,9 @@ function scrollToContatti() {
         <div class="footer-bottom">
           <p>© {{ new Date().getFullYear() }} {{ siteConfig.name }} — P.IVA {{ siteConfig.piva }}</p>
           <div class="footer-bottom-links">
-            <RouterLink to="/privacy">{{ t('footer.privacy') }}</RouterLink>
+            <RouterLink to="/privacy">
+              {{ t('footer.privacy') }}
+            </RouterLink>
             <span>·</span>
             <a href="#">{{ t('footer.cookies') }}</a>
           </div>

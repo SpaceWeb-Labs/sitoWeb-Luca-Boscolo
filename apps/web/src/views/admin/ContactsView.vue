@@ -1,13 +1,18 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { supabase } from '@/lib/supabase'
 
 const { t, locale } = useI18n()
 
 interface Submission {
-  id: string; name: string; email: string; subject: string | null
-  message: string; read: boolean; created_at: string
+  id: string
+  name: string
+  email: string
+  subject: string | null
+  message: string
+  read: boolean
+  created_at: string
 }
 
 const submissions = ref<Submission[]>([])
@@ -42,7 +47,9 @@ onMounted(load)
       <span class="count">{{ submissions.filter(s => !s.read).length }} {{ t('admin.unread') }}</span>
     </div>
 
-    <div v-if="loading" class="loading">{{ t('common.loading') }}</div>
+    <div v-if="loading" class="loading">
+      {{ t('common.loading') }}
+    </div>
 
     <div v-else class="contacts-layout">
       <!-- List -->
@@ -50,17 +57,23 @@ onMounted(load)
         <div
           v-for="sub in submissions"
           :key="sub.id"
-          :class="['contact-item', { unread: !sub.read, active: selected?.id === sub.id }]"
+          class="contact-item" :class="[{ unread: !sub.read, active: selected?.id === sub.id }]"
           @click="open(sub)"
         >
           <div class="contact-item-header">
             <strong>{{ sub.name }}</strong>
             <time>{{ new Date(sub.created_at).toLocaleDateString(locale) }}</time>
           </div>
-          <p class="contact-item-email">{{ sub.email }}</p>
-          <p class="contact-item-preview">{{ sub.message.slice(0, 60) }}...</p>
+          <p class="contact-item-email">
+            {{ sub.email }}
+          </p>
+          <p class="contact-item-preview">
+            {{ sub.message.slice(0, 60) }}...
+          </p>
         </div>
-        <p v-if="submissions.length === 0" class="empty">{{ t('admin.noMessages') }}</p>
+        <p v-if="submissions.length === 0" class="empty">
+          {{ t('admin.noMessages') }}
+        </p>
       </div>
 
       <!-- Detail -->
@@ -73,8 +86,12 @@ onMounted(load)
             </div>
             <time>{{ new Date(selected.created_at).toLocaleString(locale) }}</time>
           </div>
-          <p v-if="selected.subject" class="detail-subject"><strong>{{ t('admin.subjectLabel') }}</strong> {{ selected.subject }}</p>
-          <div class="detail-message">{{ selected.message }}</div>
+          <p v-if="selected.subject" class="detail-subject">
+            <strong>{{ t('admin.subjectLabel') }}</strong> {{ selected.subject }}
+          </p>
+          <div class="detail-message">
+            {{ selected.message }}
+          </div>
           <a :href="`mailto:${selected.email}?subject=Re: ${selected.subject || ''}`" class="btn-reply">
             {{ t('admin.replyByEmail') }}
           </a>

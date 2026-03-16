@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useI18n } from 'vue-i18n'
 import { useHead } from '@unhead/vue'
+import { onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import SiteLayout from '@/components/layout/SiteLayout.vue'
 import { useSeo } from '@/composables/useSeo'
 import { siteConfig } from '@/site.config'
-import SiteLayout from '@/components/layout/SiteLayout.vue'
 
 const { t } = useI18n()
 useSeo({
@@ -22,13 +22,13 @@ useHead({
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'InsuranceAgency',
-        name: siteConfig.name,
-        description: siteConfig.description,
-        url: siteConfig.siteUrl,
-        email: siteConfig.email,
-        telephone: siteConfig.phone,
-        areaServed: { '@type': 'AdministrativeArea', name: 'Provincia di Varese' },
-        address: { '@type': 'PostalAddress', addressRegion: 'Lombardia', addressLocality: 'Varese', addressCountry: 'IT' },
+        'name': siteConfig.name,
+        'description': siteConfig.description,
+        'url': siteConfig.siteUrl,
+        'email': siteConfig.email,
+        'telephone': siteConfig.phone,
+        'areaServed': { '@type': 'AdministrativeArea', 'name': 'Provincia di Varese' },
+        'address': { '@type': 'PostalAddress', 'addressRegion': 'Lombardia', 'addressLocality': 'Varese', 'addressCountry': 'IT' },
       }),
     },
   ],
@@ -55,13 +55,15 @@ async function submitForm() {
   try {
     const res = await fetch(siteConfig.formspreeEndpoint, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(form.value),
     })
-    if (!res.ok) throw new Error('Failed')
+    if (!res.ok)
+      throw new Error('Failed')
     formState.value = 'success'
     form.value = { name: '', email: '', phone: '', subject: '', message: '' }
-  } catch {
+  }
+  catch {
     formState.value = 'error'
   }
 }
@@ -72,17 +74,21 @@ function scrollToSection(id: string) {
 }
 
 function scrollToContatti(preselect?: string) {
-  if (preselect) form.value.subject = preselect
+  if (preselect)
+    form.value.subject = preselect
   scrollToSection('contatti')
 }
 
 // ─── IntersectionObserver for fade-in ─────────────────
 onMounted(() => {
   const observer = new IntersectionObserver(
-    (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible') }),
+    entries => entries.forEach((e) => {
+      if (e.isIntersecting)
+        e.target.classList.add('visible')
+    }),
     { threshold: 0.08, rootMargin: '0px 0px -30px 0px' },
   )
-  document.querySelectorAll('.fade-in, .fade-in-stagger').forEach((el) => observer.observe(el))
+  document.querySelectorAll('.fade-in, .fade-in-stagger').forEach(el => observer.observe(el))
 })
 </script>
 
@@ -93,18 +99,20 @@ onMounted(() => {
       <div class="container hero-inner">
         <div class="hero-content">
           <div class="hero-badge">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" /></svg>
             Consulente assicurativo in Provincia di Varese
           </div>
           <h1 class="hero-title">
-            {{ t('home.heroTitle') }}<br />
+            {{ t('home.heroTitle') }}<br>
             <span class="hero-accent">{{ t('home.heroTitleAccent') }}</span>
           </h1>
-          <p class="hero-subtitle">{{ t('home.heroSubtitle') }}</p>
+          <p class="hero-subtitle">
+            {{ t('home.heroSubtitle') }}
+          </p>
           <div class="hero-cta">
             <a href="#contatti" class="btn-primary btn-lg" @click.prevent="scrollToContatti()">
               {{ t('home.ctaPrimary') }}
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
             </a>
             <RouterLink to="/servizi" class="btn-outline-hero">
               {{ t('home.ctaSecondary') }}
@@ -113,15 +121,15 @@ onMounted(() => {
           <!-- Trust signals -->
           <div class="hero-trust">
             <div class="trust-item">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
               Iscritto RUI Sez. E
             </div>
             <div class="trust-item">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
               Consulenza gratuita
             </div>
             <div class="trust-item">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
               Provincia di Varese
             </div>
           </div>
@@ -130,7 +138,7 @@ onMounted(() => {
           <!-- Replace with actual photo -->
           <div class="hero-image-wrapper">
             <div class="hero-image-placeholder">
-              <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
               <span>Foto di Luca</span>
             </div>
             <!-- Decorative elements -->
@@ -147,7 +155,9 @@ onMounted(() => {
         <div class="section-header fade-in">
           <span class="section-label">Servizi</span>
           <h2>{{ t('home.servicesTitle') }}</h2>
-          <p class="section-subtitle">{{ t('home.servicesSubtitle') }}</p>
+          <p class="section-subtitle">
+            {{ t('home.servicesSubtitle') }}
+          </p>
         </div>
         <div class="services-grid fade-in-stagger">
           <RouterLink
@@ -156,23 +166,23 @@ onMounted(() => {
             :to="`/servizi#${service.key}`"
             class="service-card"
           >
-            <div class="service-card-icon" :style="{ background: service.color + '12', color: service.color }">
+            <div class="service-card-icon" :style="{ background: `${service.color}12`, color: service.color }">
               <!-- Car -->
-              <svg v-if="service.icon === 'car'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.5 3.5 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+              <svg v-if="service.icon === 'car'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.5 3.5 0 0 0 2 12v4c0 .6.4 1 1 1h2" /><circle cx="7" cy="17" r="2" /><circle cx="17" cy="17" r="2" /></svg>
               <!-- Home -->
-              <svg v-if="service.icon === 'home'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              <svg v-if="service.icon === 'home'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>
               <!-- Heart -->
-              <svg v-if="service.icon === 'heart'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              <svg v-if="service.icon === 'heart'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
               <!-- Piggy -->
-              <svg v-if="service.icon === 'piggy'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2"/><path d="M2 9.5a.5.5 0 1 1 1 0"/></svg>
+              <svg v-if="service.icon === 'piggy'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2" /><path d="M2 9.5a.5.5 0 1 1 1 0" /></svg>
               <!-- Briefcase -->
-              <svg v-if="service.icon === 'briefcase'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              <svg v-if="service.icon === 'briefcase'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2" /><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /></svg>
             </div>
             <h3>{{ t(`services.${service.key}.title`) }}</h3>
             <p>{{ t(`services.${service.key}.desc`) }}</p>
             <span class="service-card-link">
               {{ t('common.learnMore') }}
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
             </span>
           </RouterLink>
         </div>
@@ -187,7 +197,7 @@ onMounted(() => {
           <div class="about-image-col">
             <div class="about-image-card">
               <div class="about-image-placeholder">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
                 <span>Foto professionale</span>
               </div>
             </div>
@@ -195,10 +205,12 @@ onMounted(() => {
           <div class="about-text-col">
             <span class="section-label">Chi Sono</span>
             <h2>{{ t('about.subtitle') }}</h2>
-            <p class="about-bio">{{ t('about.teaserText') }}</p>
+            <p class="about-bio">
+              {{ t('about.teaserText') }}
+            </p>
             <div class="about-stats">
               <div v-for="(_, key) in { experience: 1, territory: 1, approach: 1, rui: 1 }" :key="key" class="stat-item">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
                 <span>{{ t(`about.points.${key}`) }}</span>
               </div>
             </div>
@@ -213,11 +225,15 @@ onMounted(() => {
         <div class="section-header fade-in">
           <span class="section-label">I miei valori</span>
           <h2>{{ t('why.title') }}</h2>
-          <p class="section-subtitle">{{ t('why.subtitle') }}</p>
+          <p class="section-subtitle">
+            {{ t('why.subtitle') }}
+          </p>
         </div>
         <div class="why-grid fade-in-stagger">
           <div v-for="key in whyKeys" :key="key" class="why-card">
-            <div class="why-number">{{ whyKeys.indexOf(key) + 1 }}</div>
+            <div class="why-number">
+              {{ whyKeys.indexOf(key) + 1 }}
+            </div>
             <h3>{{ t(`why.${key}.title`) }}</h3>
             <p>{{ t(`why.${key}.desc`) }}</p>
           </div>
@@ -231,11 +247,15 @@ onMounted(() => {
         <div class="section-header fade-in">
           <span class="section-label">Il processo</span>
           <h2>{{ t('process.title') }}</h2>
-          <p class="section-subtitle">{{ t('process.subtitle') }}</p>
+          <p class="section-subtitle">
+            {{ t('process.subtitle') }}
+          </p>
         </div>
         <div class="process-grid fade-in-stagger">
           <div v-for="i in 4" :key="i" class="process-card">
-            <div class="process-number">{{ i }}</div>
+            <div class="process-number">
+              {{ i }}
+            </div>
             <h3>{{ t(`process.step${i}.title`) }}</h3>
             <p>{{ t(`process.step${i}.desc`) }}</p>
           </div>
@@ -253,7 +273,7 @@ onMounted(() => {
           </div>
           <a href="#contatti" class="btn-primary btn-lg btn-white" @click.prevent="scrollToContatti()">
             {{ t('home.ctaButton') }}
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
           </a>
         </div>
       </div>
@@ -265,41 +285,49 @@ onMounted(() => {
         <div class="section-header fade-in">
           <span class="section-label">Scrivimi</span>
           <h2>{{ t('contact.title') }}</h2>
-          <p class="section-subtitle">{{ t('contact.subtitle') }}</p>
+          <p class="section-subtitle">
+            {{ t('contact.subtitle') }}
+          </p>
         </div>
         <div class="contact-layout fade-in">
           <!-- Form -->
           <div class="contact-form-card">
             <div v-if="formState === 'success'" class="success-state">
               <div class="success-icon-wrap">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
               </div>
               <h3>{{ t('contact.successTitle') }}</h3>
               <p>{{ t('contact.successText') }}</p>
-              <button class="btn-outline" @click="formState = 'idle'">{{ t('contact.sendAnother') }}</button>
+              <button class="btn-outline" @click="formState = 'idle'">
+                {{ t('contact.sendAnother') }}
+              </button>
             </div>
 
             <form v-else @submit.prevent="submitForm">
               <div class="form-row">
                 <div class="form-group">
                   <label for="c-name">{{ t('contact.name') }} *</label>
-                  <input id="c-name" v-model="form.name" type="text" :placeholder="t('contact.namePlaceholder')" autocomplete="name" required />
+                  <input id="c-name" v-model="form.name" type="text" :placeholder="t('contact.namePlaceholder')" autocomplete="name" required>
                 </div>
                 <div class="form-group">
                   <label for="c-email">{{ t('contact.email') }} *</label>
-                  <input id="c-email" v-model="form.email" type="email" :placeholder="t('contact.emailPlaceholder')" autocomplete="email" required />
+                  <input id="c-email" v-model="form.email" type="email" :placeholder="t('contact.emailPlaceholder')" autocomplete="email" required>
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group">
                   <label for="c-phone">{{ t('contact.phone') }}</label>
-                  <input id="c-phone" v-model="form.phone" type="tel" :placeholder="t('contact.phonePlaceholder')" autocomplete="tel" />
+                  <input id="c-phone" v-model="form.phone" type="tel" :placeholder="t('contact.phonePlaceholder')" autocomplete="tel">
                 </div>
                 <div class="form-group">
                   <label for="c-subject">{{ t('contact.subject') }}</label>
                   <select id="c-subject" v-model="form.subject">
-                    <option value="" disabled>{{ t('contact.subjectPlaceholder') }}</option>
-                    <option v-for="(label, key) in { auto: t('contact.subjectOptions.auto'), casa: t('contact.subjectOptions.casa'), salute: t('contact.subjectOptions.salute'), previdenza: t('contact.subjectOptions.previdenza'), impresa: t('contact.subjectOptions.impresa'), altro: t('contact.subjectOptions.altro') }" :key="key" :value="label">{{ label }}</option>
+                    <option value="" disabled>
+                      {{ t('contact.subjectPlaceholder') }}
+                    </option>
+                    <option v-for="(label, key) in { auto: t('contact.subjectOptions.auto'), casa: t('contact.subjectOptions.casa'), salute: t('contact.subjectOptions.salute'), previdenza: t('contact.subjectOptions.previdenza'), impresa: t('contact.subjectOptions.impresa'), altro: t('contact.subjectOptions.altro') }" :key="key" :value="label">
+                      {{ label }}
+                    </option>
                   </select>
                 </div>
               </div>
@@ -307,39 +335,53 @@ onMounted(() => {
                 <label for="c-message">{{ t('contact.message') }} *</label>
                 <textarea id="c-message" v-model="form.message" rows="5" :placeholder="t('contact.messagePlaceholder')" required />
               </div>
-              <p v-if="formState === 'error'" class="error-msg">{{ t('contact.submitError') }}</p>
+              <p v-if="formState === 'error'" class="error-msg">
+                {{ t('contact.submitError') }}
+              </p>
               <button type="submit" class="btn-primary btn-full" :disabled="formState === 'sending' || !form.name || !form.email || !form.message">
                 {{ formState === 'sending' ? t('common.loading') : t('contact.send') }}
               </button>
-              <p class="privacy-note">{{ t('contact.privacyNote') }} <RouterLink to="/privacy">{{ t('cookie.privacyPolicy') }}</RouterLink></p>
+              <p class="privacy-note">
+                {{ t('contact.privacyNote') }} <RouterLink to="/privacy">
+                  {{ t('cookie.privacyPolicy') }}
+                </RouterLink>
+              </p>
             </form>
           </div>
 
           <!-- Info cards -->
           <div class="contact-info-col">
             <div class="info-card">
-              <div class="info-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div>
+              <div class="info-card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>
+              </div>
               <div>
                 <span class="info-card-label">Email</span>
                 <a :href="`mailto:${siteConfig.email}`">{{ siteConfig.email }}</a>
               </div>
             </div>
             <div class="info-card">
-              <div class="info-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+              <div class="info-card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
+              </div>
               <div>
                 <span class="info-card-label">Telefono</span>
                 <a :href="`tel:${siteConfig.phone.replace(/\s/g, '')}`">{{ siteConfig.phone }}</a>
               </div>
             </div>
             <div class="info-card">
-              <div class="info-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+              <div class="info-card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z" /><circle cx="12" cy="10" r="3" /></svg>
+              </div>
               <div>
                 <span class="info-card-label">Zona</span>
                 <span>{{ siteConfig.area }}</span>
               </div>
             </div>
             <div class="info-card">
-              <div class="info-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+              <div class="info-card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+              </div>
               <div>
                 <span class="info-card-label">Orari</span>
                 <span>{{ siteConfig.hours }}</span>

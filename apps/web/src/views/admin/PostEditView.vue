@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
-import { onBeforeRouteLeave } from 'vue-router'
-import { useRoute, useRouter } from 'vue-router'
+import { computed, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { onBeforeRouteLeave, useRoute, useRouter } from 'vue-router'
 import { supabase } from '@/lib/supabase'
 import { useAuthStore } from '@/stores/useAuthStore'
 
@@ -35,6 +34,7 @@ function snapshot() {
 
 onBeforeRouteLeave(() => {
   if (isDirty.value && !saving.value) {
+    // eslint-disable-next-line no-alert
     return confirm(t('admin.unsavedChanges'))
   }
 })
@@ -44,7 +44,7 @@ function generateSlug(title: string) {
   return title
     .toLowerCase()
     .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[\u0300-\u036F]/g, '')
     .replace(/[^a-z0-9\s-]/g, '')
     .trim()
     .replace(/\s+/g, '-')
@@ -72,7 +72,7 @@ onMounted(async () => {
         body: data.body,
         published: data.published,
       }
-      snapshot()  // baseline for dirty tracking
+      snapshot() // baseline for dirty tracking
     }
     loading.value = false
   }
@@ -93,16 +93,19 @@ async function save() {
 
     if (isNew.value) {
       const { error } = await supabase.from('posts').insert(payload)
-      if (error) throw error
+      if (error)
+        throw error
     }
     else {
       const { error } = await supabase.from('posts').update(payload).eq('id', postId.value!)
-      if (error) throw error
+      if (error)
+        throw error
     }
-    snapshot()  // reset dirty state
+    snapshot() // reset dirty state
     router.push('/admin/posts')
   }
   catch (err) {
+    // eslint-disable-next-line no-alert
     alert(err instanceof Error ? err.message : t('admin.saveError'))
   }
   finally {
@@ -116,14 +119,18 @@ async function save() {
     <div class="edit-header">
       <h1>{{ isNew ? t('admin.newPost') : t('admin.editPost') }}</h1>
       <div class="header-actions">
-        <RouterLink to="/admin/posts" class="btn-secondary">{{ t('common.cancel') }}</RouterLink>
+        <RouterLink to="/admin/posts" class="btn-secondary">
+          {{ t('common.cancel') }}
+        </RouterLink>
         <button class="btn-primary" :disabled="saving || !form.title || !form.slug" @click="save">
           {{ saving ? t('admin.saving') : t('common.save') }}
         </button>
       </div>
     </div>
 
-    <div v-if="loading" style="color: #9ca3af; padding: 32px;">{{ t('common.loading') }}</div>
+    <div v-if="loading" style="color: #9ca3af; padding: 32px;">
+      {{ t('common.loading') }}
+    </div>
 
     <div v-else class="edit-layout">
       <!-- Main content -->
@@ -156,10 +163,18 @@ async function save() {
           <div class="form-group">
             <label>{{ t('admin.languageLabel') }}</label>
             <select v-model="form.locale">
-              <option value="it">Italiano</option>
-              <option value="en">English</option>
-              <option value="de">Deutsch</option>
-              <option value="fr">Français</option>
+              <option value="it">
+                Italiano
+              </option>
+              <option value="en">
+                English
+              </option>
+              <option value="de">
+                Deutsch
+              </option>
+              <option value="fr">
+                Français
+              </option>
             </select>
           </div>
           <div class="form-group">

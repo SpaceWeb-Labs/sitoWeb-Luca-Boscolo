@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { useI18n } from 'vue-i18n'
 import { useHead } from '@unhead/vue'
-import { supabase } from '@/lib/supabase'
-import SiteLayout from '@/components/layout/SiteLayout.vue'
 import DOMPurify from 'dompurify'
+import { computed, onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useRoute, useRouter } from 'vue-router'
+import SiteLayout from '@/components/layout/SiteLayout.vue'
+import { supabase } from '@/lib/supabase'
 
 const route = useRoute()
 const router = useRouter()
@@ -64,13 +64,16 @@ onMounted(async () => {
 
 // Sanitize HTML body before rendering — prevent XSS
 const safeBody = computed(() =>
-  post.value ? DOMPurify.sanitize(post.value.body) : ''
+  post.value ? DOMPurify.sanitize(post.value.body) : '',
 )
 
 function formatDate(dateStr: string | null) {
-  if (!dateStr) return ''
+  if (!dateStr)
+    return ''
   return new Date(dateStr).toLocaleDateString(locale.value, {
-    year: 'numeric', month: 'long', day: 'numeric',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
   })
 }
 </script>
@@ -91,12 +94,16 @@ function formatDate(dateStr: string | null) {
         <div class="post-header">
           <time>{{ formatDate(post.published_at) }}</time>
           <h1>{{ post.title }}</h1>
-          <p v-if="post.excerpt" class="excerpt">{{ post.excerpt }}</p>
+          <p v-if="post.excerpt" class="excerpt">
+            {{ post.excerpt }}
+          </p>
         </div>
         <!-- body is sanitized with DOMPurify before rendering -->
         <div class="post-body" v-html="safeBody" />
         <div class="post-footer">
-          <RouterLink to="/blog" class="back-link">{{ t('blog.back') }}</RouterLink>
+          <RouterLink to="/blog" class="back-link">
+            {{ t('blog.back') }}
+          </RouterLink>
         </div>
       </div>
     </article>

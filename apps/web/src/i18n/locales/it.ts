@@ -48,7 +48,7 @@ export default {
   cookie: {
     title: 'Utilizziamo i cookie',
     description:
-      "Questo sito utilizza cookie tecnici necessari al funzionamento e, con il tuo consenso, cookie analitici per migliorare l'esperienza. Rispettiamo la tua privacy in conformità con GDPR e LPD svizzera.",
+      'Questo sito utilizza cookie tecnici necessari al funzionamento e, con il tuo consenso, cookie analitici per migliorare l\'esperienza. Rispettiamo la tua privacy in conformità con GDPR e LPD svizzera.',
     accept: 'Accetta tutti',
     reject: 'Solo necessari',
     preferences: 'Gestisci preferenze',
@@ -293,7 +293,7 @@ export default {
     subtitle: 'Cosa mi distingue',
     consulenza: {
       title: 'Consulenza Personalizzata',
-      desc: "Non vendo polizze, trovo soluzioni. Ogni situazione è diversa e merita un'analisi dedicata.",
+      desc: 'Non vendo polizze, trovo soluzioni. Ogni situazione è diversa e merita un\'analisi dedicata.',
     },
     territorio: {
       title: 'Presente sul Territorio',
@@ -360,14 +360,14 @@ export default {
     privacyNote: 'Inviando accetti la nostra',
     infoTitle: 'Contatti diretti',
     hours: 'Lun–Ven, 9:00–18:00',
-    submitError: "Errore durante l'invio. Riprova.",
+    submitError: 'Errore durante l\'invio. Riprova.',
   },
 
   // ─── FOOTER ──────────────────────────────────────────
   footer: {
     ruiLabel: 'Intermediario assicurativo iscritto al RUI — Sezione E',
-    agencyLabel: "Collaboratore dell'Agenzia",
-    ivassNote: "Ogni intermediario è soggetto alla vigilanza dell'IVASS",
+    agencyLabel: 'Collaboratore dell\'Agenzia',
+    ivassNote: 'Ogni intermediario è soggetto alla vigilanza dell\'IVASS',
     ivassRegistry: 'Registro pubblico IVASS',
     privacy: 'Privacy Policy',
     cookies: 'Cookie Policy',

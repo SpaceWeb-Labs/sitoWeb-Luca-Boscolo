@@ -13,7 +13,7 @@ export const siteKeys = {
     ctaText: 'Contattaci oggi per discutere del tuo progetto.',
   },
   services: {
-    title: 'I nostri servizi',
+    'title': 'I nostri servizi',
     'item1.title': 'Servizio 1',
     'item1.desc': 'Descrizione del primo servizio.',
     'item2.title': 'Servizio 2',

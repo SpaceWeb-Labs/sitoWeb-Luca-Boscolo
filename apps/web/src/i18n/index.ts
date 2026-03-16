@@ -1,8 +1,8 @@
 import { createI18n } from 'vue-i18n'
-import it from './locales/it'
-import en from './locales/en'
 import de from './locales/de'
+import en from './locales/en'
 import fr from './locales/fr'
+import it from './locales/it'
 
 export type SupportedLocale = 'it' | 'en' | 'de' | 'fr'
 
@@ -12,10 +12,12 @@ export const DEFAULT_LOCALE: SupportedLocale = 'it'
 // Detect browser locale, fallback to default
 function detectLocale(): SupportedLocale {
   const saved = localStorage.getItem('locale') as SupportedLocale
-  if (saved && SUPPORTED_LOCALES.includes(saved)) return saved
+  if (saved && SUPPORTED_LOCALES.includes(saved))
+    return saved
 
   const browser = navigator.language.split('-')[0] as SupportedLocale
-  if (SUPPORTED_LOCALES.includes(browser)) return browser
+  if (SUPPORTED_LOCALES.includes(browser))
+    return browser
 
   return DEFAULT_LOCALE
 }

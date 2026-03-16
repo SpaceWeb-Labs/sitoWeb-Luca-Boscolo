@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { supabase } from '@/lib/supabase'
 
 const { t } = useI18n()
 
-interface Post { id: string; title: string; published: boolean; locale: string; published_at: string | null; created_at: string }
+interface Post { id: string, title: string, published: boolean, locale: string, published_at: string | null, created_at: string }
 const posts = ref<Post[]>([])
 const loading = ref(true)
 
@@ -25,7 +25,9 @@ async function togglePublish(post: Post) {
 }
 
 async function deletePost(id: string) {
-  if (!confirm(t('admin.confirmDelete'))) return
+  // eslint-disable-next-line no-alert
+  if (!confirm(t('admin.confirmDelete')))
+    return
   await supabase.from('posts').delete().eq('id', id)
   posts.value = posts.value.filter(p => p.id !== id)
 }
@@ -37,10 +39,14 @@ onMounted(load)
   <div class="posts-view">
     <div class="view-header">
       <h1>{{ t('admin.posts') }}</h1>
-      <RouterLink to="/admin/posts/new" class="btn-primary">+ {{ t('admin.newPost') }}</RouterLink>
+      <RouterLink to="/admin/posts/new" class="btn-primary">
+        + {{ t('admin.newPost') }}
+      </RouterLink>
     </div>
 
-    <div v-if="loading" class="loading">{{ t('common.loading') }}</div>
+    <div v-if="loading" class="loading">
+      {{ t('common.loading') }}
+    </div>
 
     <div v-else class="table-wrap">
       <table class="table">
@@ -58,22 +64,28 @@ onMounted(load)
             <td>{{ post.title }}</td>
             <td><span class="locale-badge">{{ post.locale.toUpperCase() }}</span></td>
             <td>
-              <span :class="['status-badge', post.published ? 'published' : 'draft']">
+              <span class="status-badge" :class="[post.published ? 'published' : 'draft']">
                 {{ post.published ? t('admin.published') : t('admin.draft') }}
               </span>
             </td>
             <td>{{ post.published_at ? new Date(post.published_at).toLocaleDateString() : '—' }}</td>
             <td class="actions">
-              <RouterLink :to="`/admin/posts/${post.id}/edit`" class="action-btn">{{ t('common.edit') }}</RouterLink>
+              <RouterLink :to="`/admin/posts/${post.id}/edit`" class="action-btn">
+                {{ t('common.edit') }}
+              </RouterLink>
               <button class="action-btn" @click="togglePublish(post)">
                 {{ post.published ? t('admin.unpublish') : t('admin.publish') }}
               </button>
-              <button class="action-btn danger" @click="deletePost(post.id)">{{ t('common.delete') }}</button>
+              <button class="action-btn danger" @click="deletePost(post.id)">
+                {{ t('common.delete') }}
+              </button>
             </td>
           </tr>
         </tbody>
       </table>
-      <p v-if="posts.length === 0" class="empty">{{ t('admin.noPosts') }}</p>
+      <p v-if="posts.length === 0" class="empty">
+        {{ t('admin.noPosts') }}
+      </p>
     </div>
   </div>
 </template>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import SiteLayout from '@/components/layout/SiteLayout.vue'
 import { useSeo } from '@/composables/useSeo'
 import { supabase } from '@/lib/supabase'
-import SiteLayout from '@/components/layout/SiteLayout.vue'
 
 const { t, locale } = useI18n()
 useSeo({ title: t('blog.title'), description: t('blog.subtitle') })
@@ -34,13 +34,16 @@ onMounted(async () => {
 
 // Filter strictly by current locale — only show posts in the selected language
 const visiblePosts = computed(() =>
-  posts.value.filter(p => p.locale === locale.value)
+  posts.value.filter(p => p.locale === locale.value),
 )
 
 function formatDate(dateStr: string | null) {
-  if (!dateStr) return ''
+  if (!dateStr)
+    return ''
   return new Date(dateStr).toLocaleDateString(locale.value, {
-    year: 'numeric', month: 'long', day: 'numeric',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
   })
 }
 </script>
@@ -54,7 +57,9 @@ function formatDate(dateStr: string | null) {
           <p>{{ t('blog.subtitle') }}</p>
         </div>
 
-        <div v-if="loading" class="loading">{{ t('common.loading') }}</div>
+        <div v-if="loading" class="loading">
+          {{ t('common.loading') }}
+        </div>
 
         <div v-else-if="visiblePosts.length === 0" class="empty">
           <p>{{ t('blog.empty') }}</p>
@@ -74,7 +79,9 @@ function formatDate(dateStr: string | null) {
             <div class="post-body">
               <time class="post-date">{{ formatDate(post.published_at) }}</time>
               <h2>{{ post.title }}</h2>
-              <p v-if="post.excerpt">{{ post.excerpt }}</p>
+              <p v-if="post.excerpt">
+                {{ post.excerpt }}
+              </p>
               <span class="read-more">{{ t('blog.readMore') }} →</span>
             </div>
           </RouterLink>

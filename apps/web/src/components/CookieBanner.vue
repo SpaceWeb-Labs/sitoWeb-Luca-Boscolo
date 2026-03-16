@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { supabase } from '@/lib/supabase'
 
@@ -9,12 +9,12 @@ const visible = ref(false)
 const showDetails = ref(false)
 
 const preferences = ref({
-  necessary: true,   // sempre true, non modificabile
+  necessary: true, // sempre true, non modificabile
   analytics: false,
   marketing: false,
 })
 
-type ConsentData = {
+interface ConsentData {
   necessary: boolean
   analytics: boolean
   marketing: boolean
@@ -67,7 +67,8 @@ function saveConsent(data: Omit<ConsentData, 'date' | 'version'>) {
     user_agent: navigator.userAgent,
     version: CONSENT_VERSION,
   }, { onConflict: 'session_id' }).then(({ error: upsertErr }) => {
-    if (upsertErr) console.warn('[cookie_consents] non-fatal save error:', upsertErr)
+    if (upsertErr)
+      console.warn('[cookie_consents] non-fatal save error:', upsertErr)
   })
 
   // Emit event per attivare/disattivare analytics
@@ -152,8 +153,12 @@ function savePreferences() {
           <!-- Necessary -->
           <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #f3f4f6;">
             <div>
-              <p style="margin: 0; font-weight: 500; font-size: 13px; color: #111;">{{ t('cookie.necessaryTitle') }}</p>
-              <p style="margin: 4px 0 0; font-size: 12px; color: #6b7280;">{{ t('cookie.necessaryDesc') }}</p>
+              <p style="margin: 0; font-weight: 500; font-size: 13px; color: #111;">
+                {{ t('cookie.necessaryTitle') }}
+              </p>
+              <p style="margin: 4px 0 0; font-size: 12px; color: #6b7280;">
+                {{ t('cookie.necessaryDesc') }}
+              </p>
             </div>
             <span style="font-size: 12px; color: #6b7280; font-style: italic;">{{ t('cookie.alwaysActive') }}</span>
           </div>
@@ -161,20 +166,36 @@ function savePreferences() {
           <!-- Analytics -->
           <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #f3f4f6;">
             <div>
-              <p style="margin: 0; font-weight: 500; font-size: 13px; color: #111;">{{ t('cookie.analyticsTitle') }}</p>
-              <p style="margin: 4px 0 0; font-size: 12px; color: #6b7280;">{{ t('cookie.analyticsDesc') }}</p>
+              <p style="margin: 0; font-weight: 500; font-size: 13px; color: #111;">
+                {{ t('cookie.analyticsTitle') }}
+              </p>
+              <p style="margin: 4px 0 0; font-size: 12px; color: #6b7280;">
+                {{ t('cookie.analyticsDesc') }}
+              </p>
             </div>
             <label style="position: relative; display: inline-block; width: 40px; height: 22px; cursor: pointer;">
               <input v-model="preferences.analytics" type="checkbox" style="opacity: 0; width: 0; height: 0;">
-              <span :style="{
-                position: 'absolute', inset: 0, borderRadius: '11px', transition: '0.2s',
-                background: preferences.analytics ? '#111' : '#d1d5db',
-              }">
-                <span :style="{
-                  position: 'absolute', top: '3px', width: '16px', height: '16px',
-                  background: '#fff', borderRadius: '50%', transition: '0.2s',
-                  left: preferences.analytics ? '21px' : '3px',
-                }" />
+              <span
+                :style="{
+                  position: 'absolute',
+                  inset: 0,
+                  borderRadius: '11px',
+                  transition: '0.2s',
+                  background: preferences.analytics ? '#111' : '#d1d5db',
+                }"
+              >
+                <span
+                  :style="{
+                    position: 'absolute',
+                    top: '3px',
+                    width: '16px',
+                    height: '16px',
+                    background: '#fff',
+                    borderRadius: '50%',
+                    transition: '0.2s',
+                    left: preferences.analytics ? '21px' : '3px',
+                  }"
+                />
               </span>
             </label>
           </div>
@@ -182,20 +203,36 @@ function savePreferences() {
           <!-- Marketing -->
           <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0;">
             <div>
-              <p style="margin: 0; font-weight: 500; font-size: 13px; color: #111;">{{ t('cookie.marketingTitle') }}</p>
-              <p style="margin: 4px 0 0; font-size: 12px; color: #6b7280;">{{ t('cookie.marketingDesc') }}</p>
+              <p style="margin: 0; font-weight: 500; font-size: 13px; color: #111;">
+                {{ t('cookie.marketingTitle') }}
+              </p>
+              <p style="margin: 4px 0 0; font-size: 12px; color: #6b7280;">
+                {{ t('cookie.marketingDesc') }}
+              </p>
             </div>
             <label style="position: relative; display: inline-block; width: 40px; height: 22px; cursor: pointer;">
               <input v-model="preferences.marketing" type="checkbox" style="opacity: 0; width: 0; height: 0;">
-              <span :style="{
-                position: 'absolute', inset: 0, borderRadius: '11px', transition: '0.2s',
-                background: preferences.marketing ? '#111' : '#d1d5db',
-              }">
-                <span :style="{
-                  position: 'absolute', top: '3px', width: '16px', height: '16px',
-                  background: '#fff', borderRadius: '50%', transition: '0.2s',
-                  left: preferences.marketing ? '21px' : '3px',
-                }" />
+              <span
+                :style="{
+                  position: 'absolute',
+                  inset: 0,
+                  borderRadius: '11px',
+                  transition: '0.2s',
+                  background: preferences.marketing ? '#111' : '#d1d5db',
+                }"
+              >
+                <span
+                  :style="{
+                    position: 'absolute',
+                    top: '3px',
+                    width: '16px',
+                    height: '16px',
+                    background: '#fff',
+                    borderRadius: '50%',
+                    transition: '0.2s',
+                    left: preferences.marketing ? '21px' : '3px',
+                  }"
+                />
               </span>
             </label>
           </div>

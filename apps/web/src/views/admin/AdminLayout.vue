@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useRouter, RouterView } from 'vue-router'
-import { useAuthStore } from '@/stores/useAuthStore'
+import { RouterView, useRouter } from 'vue-router'
 import { supabase } from '@/lib/supabase'
+import { useAuthStore } from '@/stores/useAuthStore'
 
 const { t } = useI18n()
 const auth = useAuthStore()
@@ -33,7 +33,9 @@ async function logout() {
     <!-- Sidebar -->
     <aside class="sidebar">
       <div class="sidebar-header">
-        <RouterLink to="/" class="logo">{{ appName }}</RouterLink>
+        <RouterLink to="/" class="logo">
+          {{ appName }}
+        </RouterLink>
         <span class="badge">Admin</span>
       </div>
       <nav class="sidebar-nav">
@@ -49,7 +51,9 @@ async function logout() {
       </nav>
       <div class="sidebar-footer">
         <span class="user-email">{{ auth.user?.email }}</span>
-        <button class="logout-btn" @click="logout">{{ t('auth.logout') }}</button>
+        <button class="logout-btn" @click="logout">
+          {{ t('auth.logout') }}
+        </button>
       </div>
     </aside>
 

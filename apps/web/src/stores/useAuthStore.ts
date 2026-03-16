@@ -1,7 +1,7 @@
-import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
-import { supabase } from '@/lib/supabase'
 import type { User } from '@supabase/supabase-js'
+import { defineStore } from 'pinia'
+import { computed, ref } from 'vue'
+import { supabase } from '@/lib/supabase'
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref<User | null>(null)
@@ -13,18 +13,21 @@ export const useAuthStore = defineStore('auth', () => {
   async function initialize() {
     const { data: { session } } = await supabase.auth.getSession()
     user.value = session?.user ?? null
-    if (user.value) await fetchProfile()
+    if (user.value)
+      await fetchProfile()
     initialized.value = true
 
     supabase.auth.onAuthStateChange(async (_event, session) => {
       user.value = session?.user ?? null
-      if (user.value) await fetchProfile()
+      if (user.value)
+        await fetchProfile()
       else profile.value = null
     })
   }
 
   async function fetchProfile() {
-    if (!user.value) return
+    if (!user.value)
+      return
     const { data } = await supabase
       .from('profiles')
       .select('role')
@@ -35,7 +38,8 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function signIn(email: string, password: string) {
     const { error } = await supabase.auth.signInWithPassword({ email, password })
-    if (error) throw error
+    if (error)
+      throw error
   }
 
   async function signOut() {
