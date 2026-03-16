@@ -66,8 +66,8 @@ function saveConsent(data: Omit<ConsentData, 'date' | 'version'>) {
     marketing: data.marketing,
     user_agent: navigator.userAgent,
     version: CONSENT_VERSION,
-  }, { onConflict: 'session_id' }).catch((err: unknown) => {
-    console.warn('[cookie_consents] non-fatal save error:', err)
+  }, { onConflict: 'session_id' }).then(({ error: upsertErr }) => {
+    if (upsertErr) console.warn('[cookie_consents] non-fatal save error:', upsertErr)
   })
 
   // Emit event per attivare/disattivare analytics

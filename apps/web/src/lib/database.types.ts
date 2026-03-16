@@ -40,6 +40,7 @@ export type Database = {
           created_at?: string
           updated_at?: string
         }
+        Relationships: []
       }
       posts: {
         Row: {
@@ -84,6 +85,15 @@ export type Database = {
           created_at?: string
           updated_at?: string
         }
+        Relationships: [
+          {
+            foreignKeyName: 'posts_author_id_fkey'
+            columns: ['author_id']
+            isOneToOne: false
+            referencedRelation: 'profiles'
+            referencedColumns: ['id']
+          },
+        ]
       }
       contact_submissions: {
         Row: {
@@ -116,6 +126,7 @@ export type Database = {
           ip_hash?: string | null
           created_at?: string
         }
+        Relationships: []
       }
       cookie_consents: {
         Row: {
@@ -151,10 +162,12 @@ export type Database = {
           version?: string
           created_at?: string
         }
+        Relationships: []
       }
     }
     Views: Record<string, never>
     Functions: Record<string, never>
     Enums: Record<string, never>
+    CompositeTypes: Record<string, never>
   }
 }

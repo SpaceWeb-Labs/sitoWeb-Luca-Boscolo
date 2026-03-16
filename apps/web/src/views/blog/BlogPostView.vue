@@ -20,7 +20,7 @@ interface Post {
   excerpt: string | null
   body: string
   cover_url: string | null
-  published_at: string
+  published_at: string | null
   locale: string
 }
 
@@ -58,7 +58,7 @@ onMounted(async () => {
     return
   }
 
-  post.value = data
+  post.value = data as Post
   loading.value = false
 })
 
@@ -67,7 +67,8 @@ const safeBody = computed(() =>
   post.value ? DOMPurify.sanitize(post.value.body) : ''
 )
 
-function formatDate(dateStr: string) {
+function formatDate(dateStr: string | null) {
+  if (!dateStr) return ''
   return new Date(dateStr).toLocaleDateString(locale.value, {
     year: 'numeric', month: 'long', day: 'numeric',
   })

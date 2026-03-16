@@ -20,7 +20,7 @@ async function load() {
     .from('contact_submissions')
     .select('*')
     .order('created_at', { ascending: false })
-  submissions.value = data || []
+  submissions.value = (data as Submission[]) || []
   loading.value = false
 }
 

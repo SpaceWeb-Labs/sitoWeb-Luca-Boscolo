@@ -15,7 +15,7 @@ async function load() {
     .from('posts')
     .select('id, title, published, locale, published_at, created_at')
     .order('created_at', { ascending: false })
-  posts.value = data || []
+  posts.value = (data as Post[]) || []
   loading.value = false
 }
 

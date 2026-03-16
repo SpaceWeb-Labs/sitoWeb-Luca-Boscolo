@@ -60,7 +60,7 @@ onMounted(async () => {
   if (!isNew.value && postId.value) {
     const { data } = await supabase
       .from('posts')
-      .select('*')
+      .select('title, slug, locale, excerpt, body, published')
       .eq('id', postId.value)
       .single()
     if (data) {
@@ -96,7 +96,7 @@ async function save() {
       if (error) throw error
     }
     else {
-      const { error } = await supabase.from('posts').update(payload).eq('id', postId.value)
+      const { error } = await supabase.from('posts').update(payload).eq('id', postId.value!)
       if (error) throw error
     }
     snapshot()  // reset dirty state

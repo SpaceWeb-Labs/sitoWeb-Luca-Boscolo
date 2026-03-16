@@ -14,7 +14,7 @@ interface Post {
   title: string
   excerpt: string | null
   cover_url: string | null
-  published_at: string
+  published_at: string | null
   locale: string
 }
 
@@ -28,7 +28,7 @@ onMounted(async () => {
     .eq('published', true)
     .order('published_at', { ascending: false })
 
-  posts.value = data || []
+  posts.value = (data as Post[]) || []
   loading.value = false
 })
 
@@ -37,7 +37,8 @@ const visiblePosts = computed(() =>
   posts.value.filter(p => p.locale === locale.value)
 )
 
-function formatDate(dateStr: string) {
+function formatDate(dateStr: string | null) {
+  if (!dateStr) return ''
   return new Date(dateStr).toLocaleDateString(locale.value, {
     year: 'numeric', month: 'long', day: 'numeric',
   })
