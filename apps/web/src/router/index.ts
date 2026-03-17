@@ -4,7 +4,7 @@ import { useAuthStore } from '@/stores/useAuthStore'
 const ADMIN_ENABLED = import.meta.env.VITE_ENABLE_ADMIN === 'true'
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   scrollBehavior(to, _from, savedPosition) {
     if (savedPosition)
       return savedPosition
