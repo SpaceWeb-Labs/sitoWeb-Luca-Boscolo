@@ -10,7 +10,7 @@ const auth = useAuthStore()
 const router = useRouter()
 
 // Config token — replaced by setup.js and available via VITE_APP_NAME at runtime
-const appName = import.meta.env.VITE_APP_NAME || '{{APP_NAME}}'
+const appName = import.meta.env.VITE_APP_NAME || 'Boscolo Luca'
 
 const unreadCount = ref(0)
 

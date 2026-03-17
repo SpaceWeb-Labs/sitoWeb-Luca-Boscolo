@@ -7,10 +7,10 @@ const { t } = useI18n()
 useSeo({ title: 'Privacy Policy', noIndex: true })
 
 // Content tokens — replaced as static strings by setup.js
-const privacyDate = '{{DATE}}'
-const companyName = '{{COMPANY_NAME}}'
-const companyAddress = '{{COMPANY_ADDRESS}}'
-const contactEmail = import.meta.env.VITE_CONTACT_EMAIL || '{{CONTACT_EMAIL}}'
+const privacyDate = '2024-01-01'
+const companyName = 'Boscolo Luca'
+const companyAddress = 'Provincia di Varese (VA)'
+const contactEmail = import.meta.env.VITE_CONTACT_EMAIL || 'info@example.com'
 </script>
 
 <template>

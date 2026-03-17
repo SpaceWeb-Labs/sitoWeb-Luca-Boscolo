@@ -9,7 +9,7 @@ interface SeoOptions {
   noIndex?: boolean
 }
 
-const APP_NAME = import.meta.env.VITE_APP_NAME || '{{APP_NAME}}'
+const APP_NAME = import.meta.env.VITE_APP_NAME || 'Boscolo Luca'
 const BASE_URL = import.meta.env.VITE_APP_URL || ''
 
 /**

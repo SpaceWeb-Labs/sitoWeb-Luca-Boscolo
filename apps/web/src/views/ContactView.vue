@@ -9,8 +9,8 @@ const { t } = useI18n()
 useSeo({ title: t('nav.contact') })
 
 // Config tokens — replaced by setup.js, available at runtime via VITE_* env vars
-const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL || '{{CONTACT_EMAIL}}'
-const COMPANY_ADDRESS = '{{COMPANY_ADDRESS}}'
+const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL || 'info@example.com'
+const COMPANY_ADDRESS = 'Provincia di Varese (VA)'
 
 const form = ref({ name: '', email: '', subject: '', message: '' })
 const state = ref<'idle' | 'sending' | 'success' | 'error'>('idle')

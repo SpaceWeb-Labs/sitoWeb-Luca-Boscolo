@@ -11,7 +11,7 @@ const route = useRoute()
 const router = useRouter()
 const { t, locale } = useI18n()
 
-const APP_NAME = import.meta.env.VITE_APP_NAME || '{{APP_NAME}}'
+const APP_NAME = import.meta.env.VITE_APP_NAME || 'Boscolo Luca'
 const BASE_URL = import.meta.env.VITE_APP_URL || ''
 
 interface Post {
