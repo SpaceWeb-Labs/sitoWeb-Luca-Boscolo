@@ -338,7 +338,7 @@ export default {
     name: 'Nome',
     namePlaceholder: 'Il tuo nome',
     email: 'Email',
-    emailPlaceholder: 'tua@email.com',
+    emailPlaceholder: "tua{'@'}email.com",
     phone: 'Telefono',
     phonePlaceholder: '+39 000 000 0000',
     subject: 'Argomento',

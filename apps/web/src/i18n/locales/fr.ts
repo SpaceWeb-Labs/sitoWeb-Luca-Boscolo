@@ -102,7 +102,7 @@ export default {
     name: 'Nom',
     namePlaceholder: 'Votre nom',
     email: 'E-mail',
-    emailPlaceholder: 'votre@email.com',
+    emailPlaceholder: "votre{'@'}email.com",
     subject: 'Objet',
     subjectPlaceholder: 'De quoi avez-vous besoin ?',
     message: 'Message',
