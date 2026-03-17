@@ -66,9 +66,10 @@ export default {
   },
   home: {
     title: 'Home',
-    description: '{{APP_TAGLINE}}',
-    heroTitle: '{{HERO_TITLE}}',
-    heroSubtitle: '{{HERO_SUBTITLE}}',
+    description: 'Persönliche Versicherungsberatung in der Provinz Varese.',
+    heroTitle: 'Schütze, was zählt,',
+    heroTitleAccent: 'mit jemandem, der wirklich zuhört.',
+    heroSubtitle: 'Maßgeschneiderte Versicherungsberatung in der Provinz Varese. Ich helfe Ihnen, den richtigen Schutz für Sie, Ihre Familie und Ihr Unternehmen zu finden.',
     ctaPrimary: 'Kontakt aufnehmen',
     ctaSecondary: 'Unsere Leistungen',
     ctaTitle: 'Bereit anzufangen?',
@@ -84,7 +85,7 @@ export default {
   about: {
     title: 'Über uns',
     teaserTitle: 'Über uns',
-    teaserText: '{{ABOUT_TEXT}}',
+    teaserText: 'Ich bin Boscolo Luca, Versicherungsberater mit Erfahrung in der Branche. Ich arbeite in der Provinz Varese mit einem beratenden und personalisierten Ansatz.',
     learnMore: 'Mehr erfahren',
     placeholder: 'Platzhalter — kundenspezifischen Inhalt einfügen.',
   },

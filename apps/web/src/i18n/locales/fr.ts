@@ -66,9 +66,10 @@ export default {
   },
   home: {
     title: 'Accueil',
-    description: '{{APP_TAGLINE}}',
-    heroTitle: '{{HERO_TITLE}}',
-    heroSubtitle: '{{HERO_SUBTITLE}}',
+    description: 'Conseil en assurance personnalisé dans la province de Varese.',
+    heroTitle: 'Protégez ce qui compte,',
+    heroTitleAccent: 'avec quelqu\'un qui vous écoute vraiment.',
+    heroSubtitle: 'Conseil en assurance sur mesure dans la province de Varese. Je vous aide à trouver la bonne protection pour vous, votre famille et votre activité.',
     ctaPrimary: 'Nous contacter',
     ctaSecondary: 'Nos services',
     ctaTitle: 'Prêt à commencer ?',
@@ -84,7 +85,7 @@ export default {
   about: {
     title: 'À propos',
     teaserTitle: 'À propos de nous',
-    teaserText: '{{ABOUT_TEXT}}',
+    teaserText: 'Je suis Boscolo Luca, consultant en assurance avec une expérience dans le secteur. J\'opère dans la province de Varese avec une approche consultative et personnalisée.',
     learnMore: 'En savoir plus',
     placeholder: 'Placeholder — ajouter le contenu spécifique au client.',
   },

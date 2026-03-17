@@ -66,9 +66,10 @@ export default {
   },
   home: {
     title: 'Home',
-    description: '{{APP_TAGLINE}}',
-    heroTitle: '{{HERO_TITLE}}',
-    heroSubtitle: '{{HERO_SUBTITLE}}',
+    description: 'Personalized insurance consulting in the province of Varese.',
+    heroTitle: 'Protect what matters,',
+    heroTitleAccent: 'with someone who truly listens.',
+    heroSubtitle: 'Tailored insurance consulting in the province of Varese. I help you find the right protection for you, your family and your business.',
     ctaPrimary: 'Contact us',
     ctaSecondary: 'Our services',
     ctaTitle: 'Ready to get started?',
@@ -84,7 +85,7 @@ export default {
   about: {
     title: 'About us',
     teaserTitle: 'About us',
-    teaserText: '{{ABOUT_TEXT}}',
+    teaserText: 'I am Boscolo Luca, insurance consultant with experience in the sector. I operate in the province of Varese with a consultative and personalized approach.',
     learnMore: 'Learn more',
     placeholder: 'Placeholder — add client-specific content.',
   },
